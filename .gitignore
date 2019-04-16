@@ -1,6 +1,6 @@
 *.txt
 *.pyc
-test/__pycache__
-psr_formats/__pycache__
+test/__pycache__/
+psr_formats/__pycache__/
 *.dump
 *.dada
