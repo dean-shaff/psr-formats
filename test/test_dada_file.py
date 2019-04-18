@@ -1,6 +1,7 @@
 import unittest
 import os
 import logging
+import datetime
 
 import numpy as np
 
@@ -78,6 +79,23 @@ class TestDADAFile(unittest.TestCase):
         new_file_path = self.dada_files[0].dump_data(overwrite=False)
         self.assertFalse(new_file_path == self.dada_files[0].file_path)
         os.remove(new_file_path)
+
+    def test_get_utc_start(self):
+        self.dada_files[0].load_data()
+        d = self.dada_files[0].utc_start
+        expected_str = "2019-02-06 03:41:41"
+        self.assertTrue(str(d) == expected_str)
+
+    def test_set_utc_start(self):
+        self.dada_files[0].load_data()
+        new_utc_start = datetime.datetime.utcnow()
+        self.dada_files[0].utc_start = new_utc_start
+
+        self.dada_files[0].utc_start = new_utc_start.strftime(
+            DADAFile.timestamp_formatter)
+
+        with self.assertRaises(ValueError):
+            self.dada_files[0].utc_start = "foo"
 
 
 if __name__ == "__main__":

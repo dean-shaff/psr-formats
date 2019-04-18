@@ -38,7 +38,7 @@ def _process_header(header_arr: np.ndarray) -> dict:
 
 
 def load_dada_file(file_path: str) -> typing.List:
-    header_size = 4096  # smalled header size supported by DADA format
+    header_size = 4096  # smallest header size supported by DADA format
     header_read = False
     with open(file_path, "rb") as file:
         buffer = file.read()

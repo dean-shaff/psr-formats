@@ -1,6 +1,7 @@
 # dada_file.py
 import logging
 import os
+import datetime
 
 import numpy as np
 
@@ -38,6 +39,8 @@ class DADAFile(DataFile):
         "PFB_DC_CHAN": "1"
     }
 
+    timestamp_formatter = "%Y-%m-%d-%H:%M:%S"
+
     def __init__(self, file_path: str):
         super(DADAFile, self).__init__(file_path)
         self._header = self.default_header.copy()
@@ -62,7 +65,27 @@ class DADAFile(DataFile):
 
         return data
 
-    def load_data(self) -> None:
+    @property
+    def utc_start(self) -> datetime.datetime:
+        return datetime.datetime.strptime(
+            self._header["UTC_START"], self.timestamp_formatter)
+
+    @utc_start.setter
+    def utc_start(self, new_utc_start):
+        """
+        Can either pass a str or a datetime object.
+        If str doesn't fit `timestamp_formatter` class attribute,
+        then raises ValueError
+        """
+        if hasattr(new_utc_start, "strftime"):  # passing datetime object
+            self._header["UTC_START"] = new_utc_start.strftime(
+                self.timestamp_formatter)
+        else:  # passing str object
+            datetime.datetime.strptime(
+                new_utc_start, self.timestamp_formatter)
+            self._header["UTC_START"] = new_utc_start
+
+    def load_data(self):
 
         self._load_data_from_file()
         self._data = self._shape_data(self._data).copy()

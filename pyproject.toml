@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "psr-formats"
-version = "0.1.0"
+version = "0.1.1"
 description = "Various formats used in pulsar signal processing"
 authors = ["Dean Shaff <dshaff@swin.edu.au>"]
 license = "MIT"
