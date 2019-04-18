@@ -11,6 +11,10 @@
 `datetime.datetime` object.
 - Added corresponding test for `DADAFile` class.
 
+### v0.1.2
+
+- Added `DataFile` to exports in __init__.py
+
 ### v0.2.0
 
 TODO:
