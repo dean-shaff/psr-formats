@@ -86,7 +86,7 @@ class DADAFile(DataFile):
             self._header["UTC_START"] = new_utc_start
 
     def load_data(self):
-
+        self._loaded = True
         self._load_data_from_file()
         self._data = self._shape_data(self._data).copy()
         return self

@@ -19,6 +19,7 @@ class DataFile:
         self._file_path = file_path
         self._header = None
         self._data = None
+        self._loaded = False
 
     @property
     def file_path(self) -> str:
@@ -62,6 +63,10 @@ class DataFile:
         self["NCHAN"] = str(nchan)
         self["NPOL"] = str(npol)
         self["NDIM"] = str(ndim)
+
+    @property
+    def loaded(self):
+        return self._loaded
 
     @property
     def nchan(self) -> int:

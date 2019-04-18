@@ -15,6 +15,10 @@
 
 - Added `DataFile` to exports in __init__.py
 
+### v0.1.3
+
+- Added `loaded` flag to `DataFile`
+
 ### v0.2.0
 
 TODO:
